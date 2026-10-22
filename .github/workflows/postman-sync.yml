@@ -1,0 +1,56 @@
+name: Sync Postman Collection
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download latest Postman Collection
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: |
+          curl --fail-with-body --show-error --silent \
+            --retry 2 \
+            --header "X-Api-Key: $POSTMAN_API_KEY" \
+            "https://api.getpostman.com/collections/59055530-2c4e9ab7-7277-41fd-b9ec-8b6c4e6aed60" \
+            -o postman-response.json
+
+          python3 - <<'PY'
+          import json
+
+          with open("postman-response.json", encoding="utf-8") as f:
+              response = json.load(f)
+
+          collection = response["collection"]
+
+          with open("ReqRes_Collection.json", "w", encoding="utf-8") as f:
+              json.dump(collection, f, indent=2, ensure_ascii=False)
+              f.write("\n")
+          PY
+
+          rm postman-response.json
+
+      - name: Commit Collection changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add ReqRes_Collection.json
+
+          if git diff --cached --quiet; then
+            echo "No Collection changes"
+          else
+            git commit -m "Sync latest Postman Collection"
+            git push
+          fi
