@@ -10,45 +10,71 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Newman
+        run: npm install -g newman
+
       - name: Check ReqRes API
         env:
           REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
         run: |
-          python3 - <<'PY'
-          import os
-          import time
-          import urllib.request
-          import urllib.error
+          node - <<'JS'
+          const newman = require('/usr/local/lib/node_modules/newman');
 
-          url = "https://reqres.in/api/users?page=1"
+          const apiKey = process.env.REQRES_API_KEY;
 
-          headers = {
-              "x-api-key": os.environ.get("REQRES_API_KEY", ""),
-              "Accept": "application/json"
+          if (!apiKey) {
+            console.error('Missing REQRES_API_KEY');
+            process.exit(1);
           }
 
-          request = urllib.request.Request(url, headers=headers)
+          const collection = {
+            info: {
+              name: 'ReqRes Monitor',
+              schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json'
+            },
+            item: [{
+              name: 'GET Users Page 1',
+              request: {
+                method: 'GET',
+                header: [
+                  { key: 'x-api-key', value: '{{apiKey}}' }
+                ],
+                url: 'https://reqres.in/api/users?page=1'
+              },
+              event: [{
+                listen: 'test',
+                script: {
+                  exec: [
+                    'pm.test("Status Code is 200", function () {',
+                    '  pm.response.to.have.status(200);',
+                    '});',
+                    'pm.test("Response Time below 800ms", function () {',
+                    '  pm.expect(pm.response.responseTime).to.be.below(800);',
+                    '});'
+                  ]
+                }
+              }]
+            }]
+          };
 
-          start = time.perf_counter()
-
-          try:
-              with urllib.request.urlopen(request, timeout=15) as response:
-                  status = response.status
-                  body = response.read().decode("utf-8", errors="replace")
-          except urllib.error.HTTPError as error:
-              status = error.code
-              body = error.read().decode("utf-8", errors="replace")
-
-          elapsed = (time.perf_counter() - start) * 1000
-
-          print("Status Code:", status)
-          print(f"Response Time: {elapsed:.2f} ms")
-
-          if status != 200:
-              print("API Error:", body[:1000])
-
-          assert status == 200, "API status must be 200"
-          assert elapsed < 800, "Response time must be below 800ms"
-
-          print("Monitor PASSED")
-          PY
+          newman.run({
+            collection,
+            envVar: [{ key: 'apiKey', value: apiKey }],
+            reporters: 'cli'
+          }, function (err, summary) {
+            if (err || summary.run.failures.length > 0) {
+              console.error('Monitor FAILED');
+              process.exitCode = 1;
+            } else {
+              console.log('Monitor PASSED');
+            }
+          });
+          JS
