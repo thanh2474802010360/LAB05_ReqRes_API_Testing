@@ -4,7 +4,7 @@
     "name": "2474802010360_NgoVinhThanh_ReqRes",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "createdAt": "2026-10-22T09:02:43.000Z",
-    "updatedAt": "2026-10-22T09:05:08.000Z",
+    "updatedAt": "2026-10-22T10:30:36.000Z",
     "lastUpdatedBy": "59055530",
     "uid": "59055530-2c4e9ab7-7277-41fd-b9ec-8b6c4e6aed60"
   },
@@ -348,6 +348,45 @@
       "createdAt": "2026-10-22T09:05:08.000Z",
       "updatedAt": "2026-10-22T09:25:49.000Z",
       "uid": "59055530-afbf4b62-f1ec-46ac-8419-db2830580686"
+    },
+    {
+      "name": "GET - Test Auto Sync",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});"
+            ]
+          }
+        }
+      ],
+      "id": "12ac904d-2ef7-485c-98bf-b8e6945f5ff4",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/users?page=2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "users"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": [],
+      "createdAt": "2026-10-22T10:30:36.000Z",
+      "updatedAt": "2026-10-22T10:30:57.000Z",
+      "uid": "59055530-12ac904d-2ef7-485c-98bf-b8e6945f5ff4"
     }
   ]
 }
