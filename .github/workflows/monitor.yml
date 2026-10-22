@@ -21,28 +21,31 @@ jobs:
           import urllib.error
 
           url = "https://reqres.in/api/users?page=1"
+
           headers = {
-              "x-api-key": os.environ["REQRES_API_KEY"]
+              "x-api-key": os.environ.get("REQRES_API_KEY", ""),
+              "Accept": "application/json"
           }
 
-          request = urllib.request.Request(
-              url,
-              headers=headers
-          )
+          request = urllib.request.Request(url, headers=headers)
 
           start = time.perf_counter()
 
           try:
               with urllib.request.urlopen(request, timeout=15) as response:
                   status = response.status
-                  response.read()
+                  body = response.read().decode("utf-8", errors="replace")
           except urllib.error.HTTPError as error:
               status = error.code
+              body = error.read().decode("utf-8", errors="replace")
 
           elapsed = (time.perf_counter() - start) * 1000
 
-          print(f"Status Code: {status}")
+          print("Status Code:", status)
           print(f"Response Time: {elapsed:.2f} ms")
+
+          if status != 200:
+              print("API Error:", body[:1000])
 
           assert status == 200, "API status must be 200"
           assert elapsed < 800, "Response time must be below 800ms"
