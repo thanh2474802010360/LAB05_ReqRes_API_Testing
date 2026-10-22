@@ -3,8 +3,10 @@
     "_postman_id": "2c4e9ab7-7277-41fd-b9ec-8b6c4e6aed60",
     "name": "2474802010360_NgoVinhThanh_ReqRes",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "59055530",
-    "_collection_link": "https://go.postman.co/collection/59055530-2c4e9ab7-7277-41fd-b9ec-8b6c4e6aed60?source=collection_link"
+    "createdAt": "2026-10-22T09:02:43.000Z",
+    "updatedAt": "2026-10-22T09:05:08.000Z",
+    "lastUpdatedBy": "59055530",
+    "uid": "59055530-2c4e9ab7-7277-41fd-b9ec-8b6c4e6aed60"
   },
   "item": [
     {
@@ -23,6 +25,7 @@
               }
             }
           ],
+          "id": "6b8b6814-e0e8-4456-bb9a-23117c7bb3a1",
           "request": {
             "method": "POST",
             "header": [
@@ -55,7 +58,10 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "createdAt": "2026-10-22T09:05:57.000Z",
+          "updatedAt": "2026-10-22T09:13:58.000Z",
+          "uid": "59055530-6b8b6814-e0e8-4456-bb9a-23117c7bb3a1"
         },
         {
           "name": "GET - Single User",
@@ -70,6 +76,7 @@
               }
             }
           ],
+          "id": "2e6505b8-caee-4f78-9019-fe7229b592c9",
           "request": {
             "method": "GET",
             "header": [
@@ -90,7 +97,10 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "createdAt": "2026-10-22T09:14:58.000Z",
+          "updatedAt": "2026-10-22T09:15:53.000Z",
+          "uid": "59055530-2e6505b8-caee-4f78-9019-fe7229b592c9"
         },
         {
           "name": "PUT - Update User",
@@ -105,6 +115,7 @@
               }
             }
           ],
+          "id": "681b3a08-051b-4c36-a12e-2422804b3ae1",
           "request": {
             "method": "PUT",
             "header": [
@@ -138,7 +149,10 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "createdAt": "2026-10-22T09:16:30.000Z",
+          "updatedAt": "2026-10-22T09:17:54.000Z",
+          "uid": "59055530-681b3a08-051b-4c36-a12e-2422804b3ae1"
         },
         {
           "name": "DELETE - Delete User",
@@ -153,6 +167,7 @@
               }
             }
           ],
+          "id": "a53f7ec8-bae5-443c-bf10-35fb02786dd6",
           "request": {
             "method": "DELETE",
             "header": [
@@ -173,9 +188,16 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "createdAt": "2026-10-22T09:18:41.000Z",
+          "updatedAt": "2026-10-22T09:19:36.000Z",
+          "uid": "59055530-a53f7ec8-bae5-443c-bf10-35fb02786dd6"
         }
-      ]
+      ],
+      "id": "aa94b8a6-f7c3-42a9-8419-ee2ffea90e08",
+      "createdAt": "2026-10-22T09:04:56.000Z",
+      "updatedAt": "2026-10-22T09:18:41.000Z",
+      "uid": "59055530-aa94b8a6-f7c3-42a9-8419-ee2ffea90e08"
     },
     {
       "name": "Negative_Cases",
@@ -193,6 +215,7 @@
               }
             }
           ],
+          "id": "bfa0e40f-9fb3-4196-9a62-ace66c0c26f5",
           "request": {
             "method": "POST",
             "header": [
@@ -225,7 +248,10 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "createdAt": "2026-10-22T09:20:37.000Z",
+          "updatedAt": "2026-10-22T09:21:39.000Z",
+          "uid": "59055530-bfa0e40f-9fb3-4196-9a62-ace66c0c26f5"
         },
         {
           "name": "POST - Login Unsuccessful",
@@ -240,6 +266,7 @@
               }
             }
           ],
+          "id": "8570df00-8727-449f-a61e-9bf3bf8fd407",
           "request": {
             "method": "POST",
             "header": [
@@ -272,7 +299,10 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "createdAt": "2026-10-22T09:24:10.000Z",
+          "updatedAt": "2026-10-22T09:25:25.000Z",
+          "uid": "59055530-8570df00-8727-449f-a61e-9bf3bf8fd407"
         },
         {
           "name": "GET - User Not Found",
@@ -287,6 +317,7 @@
               }
             }
           ],
+          "id": "1eadb7f4-c405-4290-9dd7-43ce0f1ae1de",
           "request": {
             "method": "GET",
             "header": [
@@ -307,9 +338,16 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "createdAt": "2026-10-22T09:25:49.000Z",
+          "updatedAt": "2026-10-22T09:26:32.000Z",
+          "uid": "59055530-1eadb7f4-c405-4290-9dd7-43ce0f1ae1de"
         }
-      ]
+      ],
+      "id": "afbf4b62-f1ec-46ac-8419-db2830580686",
+      "createdAt": "2026-10-22T09:05:08.000Z",
+      "updatedAt": "2026-10-22T09:25:49.000Z",
+      "uid": "59055530-afbf4b62-f1ec-46ac-8419-db2830580686"
     }
   ]
 }
